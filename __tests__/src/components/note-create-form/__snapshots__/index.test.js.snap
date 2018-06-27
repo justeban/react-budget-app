@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NoteForm /> (Snapshot Test) renders cleanly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="title"
+    type="text"
+  />
+  <input
+    name="content"
+    type="text"
+  />
+  <input
+    type="submit"
+  />
+</form>
+`;
