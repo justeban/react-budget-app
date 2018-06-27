@@ -14,7 +14,15 @@ class Dashboard extends React.Component {
           <CategoryForm handler={this.props.handleCreateCategory}/>
           <div id="expense-categories">
             {
-              this.props.categories.map((category, i) => <CategoryItem key={category.id} title={category.title}/> )
+              this.props.categories.map((category, i) => 
+                <CategoryItem 
+                  key={category.id} 
+                  title={category.title} 
+                  budget={category.budget}
+                  category={category}
+                  handleUpdate={this.props.handleUpdateCategory}
+                  handleDestroy={this.props.handleDestroyCategory}
+                /> )
             }
           </div>
         </div>
