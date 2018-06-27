@@ -13,10 +13,6 @@ export default class CategoryForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log('__STATE__', this.state);
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     this.props.handler(Object.assign({}, this.state));

@@ -1,5 +1,6 @@
 import React from 'react';
 import CategoryForm from '../category-form';
+import CategoryItem from '../category-item/index.js';
 
 import {connect} from 'react-redux';
 import { categoryCreate, categoryUpdate, categoryDestroy} from '../../app/actions/categories.js';
@@ -11,6 +12,11 @@ class Dashboard extends React.Component {
         <h2>Dashboard</h2>
         <div id="board">
           <CategoryForm handler={this.props.handleCreateCategory}/>
+          <div id="expense-categories">
+            {
+              this.props.categories.map((category, i) => <CategoryItem key={category.id} title={category.title}/> )
+            }
+          </div>
         </div>
       </React.Fragment>
     );
