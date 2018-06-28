@@ -3,6 +3,7 @@ import React from 'react';
 import CategoryForm from '../category-form/index.js';
 import ExpenseForm from '../expense-form/index.js';
 import ExpenseItem from '../expense-item/index.js';
+import BudgetTracker from '../budget-tracker/index.js';
 
 import {connect} from 'react-redux';
 import{expenseCreate, expenseDestroy, expenseUpdate} from '../../app/actions/expenses.js';
@@ -40,19 +41,21 @@ class CategoryItem extends React.Component {
 
         <ExpenseForm handler={this.props.handleCreateExpense} category={this.props.category}/>
         <div id="expense-items">
-          {
-            this.props.expenses[this.props.category.id].map((expense, i) => 
-              <ExpenseItem 
-                key={expense.id} 
-                title={expense.title} 
-                amountSpent={expense.amountSpent} 
-                memo={expense.memo}
-                expense={expense}
-                handleUpdate={this.props.handleUpdateExpense}
-                handleDestory={this.props.handleDestroyExpense}
-              />
-            )
-          }
+          <BudgetTracker masterBudget={this.props.category.budget}>
+            {
+              this.props.expenses[this.props.category.id].map((expense, i) => 
+                <ExpenseItem 
+                  key={expense.id} 
+                  title={expense.title} 
+                  amountSpent={expense.amountSpent} 
+                  memo={expense.memo}
+                  expense={expense}
+                  handleUpdate={this.props.handleUpdateExpense}
+                  handleDestory={this.props.handleDestroyExpense}
+                />
+              )
+            }
+          </BudgetTracker>
         </div>
       </React.Fragment>
     );
