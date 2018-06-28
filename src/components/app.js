@@ -22,7 +22,7 @@ export default class App extends React.Component {
         <React.Fragment>
           <BrowserRouter>
             <main>
-              <Route path="/" component={Dashboard} />
+              <Route path="/dashboard" component={Dashboard} />
             </main>
           </BrowserRouter>
         </React.Fragment>

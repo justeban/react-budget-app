@@ -1,5 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-import reducer from './reducers/categories';
+import categoryReducer from './reducers/categories';
+import expenseReducer from './reducers/expenses';
 
-export default () => createStore(reducer);
+let reducers = combineReducers({
+  categories: categoryReducer,
+  expenses: expenseReducer,
+});
+
+export default () => createStore(reducers);
