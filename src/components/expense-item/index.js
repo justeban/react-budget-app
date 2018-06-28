@@ -13,6 +13,7 @@ export default class ExpenseItem extends React.Component {
     this.toggleEditing = this.toggleEditing.bind(this);
   }
 
+
   toggleEditing() {
     if (!this.state.editing) {
       this.setState({ editing: true });
@@ -20,12 +21,13 @@ export default class ExpenseItem extends React.Component {
       this.setState({ editing: false });
     }
   }
+
   render() {
     return (
       <React.Fragment>
-        <h4>{this.props.title}</h4>
-        <div>{this.props.amountSpent}</div>
-        <p>{this.props.memo}</p>
+        <h4>{this.props.expense.title}</h4>
+        <div>{this.props.expense.amountSpent}</div>
+        <p>{this.props.expense.memo}</p>
         <a href="#" onClick={() => this.props.handleDestory(this.props.expense)}>DELETE</a>
         <a href="#" onClick={this.toggleEditing}>EDIT EXPENSE</a>
         {

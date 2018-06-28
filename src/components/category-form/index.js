@@ -16,7 +16,6 @@ export default class CategoryForm extends React.Component {
     this.props.handler(Object.assign({}, this.state));
 
     if (this.props.toggle) { this.props.toggle(); }
-
     this.setState({title: '', budget: ''});
   }
 

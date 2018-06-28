@@ -21,6 +21,7 @@ export default class ExpenseForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.handler(Object.assign({}, this.state));
+
     this.setState({ title: '', amountSpent: '', memo: '' });
     
     if (this.props.toggle) { this.props.toggle(); }

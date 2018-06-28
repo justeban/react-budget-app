@@ -18,7 +18,9 @@ class CategoryItem extends React.Component {
     };
 
     this.toggleEditing = this.toggleEditing.bind(this);
+    this.handleBudgetChange = this.handleBudgetChange.bind(this);
   }
+
 
   toggleEditing() {
     if (!this.state.editing) {
@@ -28,11 +30,20 @@ class CategoryItem extends React.Component {
     }
   }
 
+  handleBudgetChange() {
+    let expAmt = this.props.expenses[this.props.category.id].reduce((acc, exp) => {
+      acc += parseInt(exp.amountSpent);
+      return acc;
+    }, 0);
+    return parseInt(this.props.category.budget) - expAmt;
+
+  }
+
   render() {
     return (
       <React.Fragment>
-        <h3>{this.props.title}</h3>
-        <div className="budget">{this.props.budget}</div>
+        <h3>{this.props.category.title}</h3>
+        <div className="budget">{this.props.category.budget}:{this.handleBudgetChange()}</div>
         <a href="#" onClick={() => this.props.handleDestroy(this.props.category.id)}>Delete</a>
         <a href="#" onClick={this.toggleEditing}>Edit Category</a>
         {
@@ -41,21 +52,17 @@ class CategoryItem extends React.Component {
 
         <ExpenseForm handler={this.props.handleCreateExpense} category={this.props.category}/>
         <div id="expense-items">
-          <BudgetTracker masterBudget={this.props.category.budget}>
-            {
-              this.props.expenses[this.props.category.id].map((expense, i) => 
-                <ExpenseItem 
-                  key={expense.id} 
-                  title={expense.title} 
-                  amountSpent={expense.amountSpent} 
-                  memo={expense.memo}
-                  expense={expense}
-                  handleUpdate={this.props.handleUpdateExpense}
-                  handleDestory={this.props.handleDestroyExpense}
-                />
-              )
-            }
-          </BudgetTracker>
+          {
+            this.props.expenses[this.props.category.id].map((expense, i) => 
+              <ExpenseItem 
+                key={expense.id}
+                expense={expense}
+                handleUpdate={this.props.handleUpdateExpense}
+                handleDestory={this.props.handleDestroyExpense}
+                updateBudget={this.handleBudgetChange}
+              />
+            )
+          }
         </div>
       </React.Fragment>
     );
