@@ -3,7 +3,6 @@ import React from 'react';
 import CategoryForm from '../category-form/index.js';
 import ExpenseForm from '../expense-form/index.js';
 import ExpenseItem from '../expense-item/index.js';
-import BudgetTracker from '../budget-tracker/index.js';
 
 import {connect} from 'react-redux';
 import{expenseCreate, expenseDestroy, expenseUpdate} from '../../app/actions/expenses.js';
