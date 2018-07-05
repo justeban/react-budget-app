@@ -26,8 +26,8 @@ export default class CategoryForm extends React.Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleChange} name="title" type="text" required value={this.state.title}/>
-        <input onChange={this.handleChange} name="budget" type="number" required value={this.state.budget} />
+        <input onChange={this.handleChange} placeholder="Enter Category Name"name="title" type="text" required value={this.state.title}/>
+        $ <input onChange={this.handleChange} placeholder="Enter Budget Amt" name="budget" type="number" required value={this.state.budget} />
         <input type="submit"/>
       </form>
     );

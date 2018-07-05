@@ -41,25 +41,31 @@ class CategoryItem extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h3>{this.props.category.title}</h3>
-        <div className="budget">{this.props.category.budget}:{this.handleBudgetChange()}</div>
-        <a href="#" onClick={() => this.props.handleDestroy(this.props.category.id)}>Delete</a>
-        <a href="#" onClick={this.toggleEditing}>Edit Category</a>
+        <div className="category-title">
+          <h3>{this.props.category.title}</h3>
+          <div className="budget">$ {this.props.category.budget} | $ {this.handleBudgetChange()}</div>
+          <div className="cat-icons">
+            <i className="fas fa-trash-alt" alt="Delete Category" title="Delete Category" onClick={() => this.props.handleDestroy(this.props.category.id)}></i>
+            <i className="fas fa-pencil-alt" alt="Edit Category" title="Edit Category" onClick={this.toggleEditing}></i>
+          </div>
+        </div>
         {
           this.state.editing ? <CategoryForm handler={this.props.handleUpdate} category={this.props.category} toggle={this.toggleEditing}/> : null
         }
-
+        <h4>Expense Items: </h4>
         <ExpenseForm handler={this.props.handleCreateExpense} category={this.props.category}/>
-        <div id="expense-items">
+        <div className="expense-items">
           {
             this.props.expenses[this.props.category.id].map((expense, i) => 
-              <ExpenseItem 
-                key={expense.id}
-                expense={expense}
-                handleUpdate={this.props.handleUpdateExpense}
-                handleDestory={this.props.handleDestroyExpense}
-                updateBudget={this.handleBudgetChange}
-              />
+              <div key={i} className="expense-item">
+                <ExpenseItem 
+                  key={expense.id}
+                  expense={expense}
+                  handleUpdate={this.props.handleUpdateExpense}
+                  handleDestory={this.props.handleDestroyExpense}
+                  updateBudget={this.handleBudgetChange}
+                />
+              </div>
             )
           }
         </div>
