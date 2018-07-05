@@ -1,5 +1,13 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 
-import reducer from './reducers/categories';
+import reporter from './middleware/reporter.js';
 
-export default () => createStore(reducer);
+import categoryReducer from './reducers/categories';
+import expenseReducer from './reducers/expenses';
+
+let reducers = combineReducers({
+  categories: categoryReducer,
+  expenses: expenseReducer,
+});
+
+export default () => createStore(reducers, applyMiddleware());
