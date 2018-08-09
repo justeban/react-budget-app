@@ -6,12 +6,9 @@ export default class CategoryForm extends React.Component {
     super(props);
   
     this.state = this.props.category || { title: '', budget: 0 };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.handler(Object.assign({}, this.state));
 
@@ -19,7 +16,7 @@ export default class CategoryForm extends React.Component {
     this.setState({title: '', budget: ''});
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -27,7 +24,8 @@ export default class CategoryForm extends React.Component {
     return(
       <form onSubmit={this.handleSubmit}>
         <input onChange={this.handleChange} placeholder="Enter Category Name"name="title" type="text" required value={this.state.title}/>
-        $ <input onChange={this.handleChange} placeholder="Enter Budget Amt" name="budget" type="number" required value={this.state.budget} />
+        <span>$</span> 
+        <input onChange={this.handleChange} placeholder="Enter Budget Amt" name="budget" type="number" required value={this.state.budget} />
         <input type="submit"/>
       </form>
     );

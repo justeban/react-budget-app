@@ -14,11 +14,9 @@ export default class ExpenseForm extends React.Component {
 
     this.state = this.props.expense || defaultState;
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.handler(Object.assign({}, this.state));
 
@@ -27,7 +25,7 @@ export default class ExpenseForm extends React.Component {
     if (this.props.toggle) { this.props.toggle(); }
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 

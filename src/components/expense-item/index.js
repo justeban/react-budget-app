@@ -9,12 +9,10 @@ export default class ExpenseItem extends React.Component {
     this.state = {
       editing: false,
     };
-
-    this.toggleEditing = this.toggleEditing.bind(this);
   }
 
 
-  toggleEditing() {
+  toggleEditing = () => {
     if (!this.state.editing) {
       this.setState({ editing: true });
     } else {

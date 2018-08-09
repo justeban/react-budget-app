@@ -15,13 +15,9 @@ class CategoryItem extends React.Component {
     this.state = {
       editing: false,
     };
-
-    this.toggleEditing = this.toggleEditing.bind(this);
-    this.handleBudgetChange = this.handleBudgetChange.bind(this);
   }
 
-
-  toggleEditing() {
+  toggleEditing = () => {
     if (!this.state.editing) {
       this.setState({editing: true});
     } else {
@@ -29,12 +25,13 @@ class CategoryItem extends React.Component {
     }
   }
 
-  handleBudgetChange() {
+  handleBudgetChange = () => {
     let expAmt = this.props.expenses[this.props.category.id].reduce((acc, exp) => {
-      acc += parseInt(exp.amountSpent);
+      acc += parseFloat(exp.amountSpent);
       return acc;
     }, 0);
-    return parseInt(this.props.category.budget) - expAmt;
+    let amt = parseFloat(this.props.category.budget) - expAmt;
+    return `${amt}`.match(/\./) ? amt.toFixed(2): amt;
 
   }
 
@@ -52,7 +49,7 @@ class CategoryItem extends React.Component {
         {
           this.state.editing ? <CategoryForm handler={this.props.handleUpdate} category={this.props.category} toggle={this.toggleEditing}/> : null
         }
-        <h4>Expense Items: </h4>
+        <h4>Add An Expense Item: </h4>
         <ExpenseForm handler={this.props.handleCreateExpense} category={this.props.category}/>
         <div className="expense-items">
           {
