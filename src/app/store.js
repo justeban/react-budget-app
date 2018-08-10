@@ -10,4 +10,4 @@ let reducers = combineReducers({
   expenses: expenseReducer,
 });
 
-export default () => createStore(reducers, applyMiddleware());
+export default () => createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware());
