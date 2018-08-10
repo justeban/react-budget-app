@@ -21,7 +21,6 @@ export default class CategoryItem extends React.Component {
   }
 
   handleBudgetChange = () => {
-    console.log("HELLOW HERE", this.props.expenses);
     let expAmt = this.props.expenses[this.props.category.id].reduce((acc, exp) => {
       acc += parseFloat(exp.amountSpent);
       return acc;
