@@ -24,6 +24,12 @@ class Dashboard extends React.Component {
     console.log('__DASHBOARD__STATE', this.state);
   }
 
+  setExpenseFocus = () => {
+    console.log("DO WE GET HERE");
+    let expenseKey = this.props.categories[this.props.categories.length - 1].id;
+    this.setState({ expenseKey });
+  } 
+
   handleCategoryClick = (e) => {
     let targetIndex = e.target.dataset.index;
     console.log('TARGET', targetIndex);
@@ -39,7 +45,7 @@ class Dashboard extends React.Component {
         <section className="dashboard">
           <div className="category-form">
             <h2>Add a New Budget Category</h2>
-            <CategoryForm handler={this.props.handleCreateCategory}/>
+            <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} />
           </div>
           <div className="budget-content">
             <div className="expense-categories">
