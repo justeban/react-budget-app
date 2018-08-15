@@ -14,9 +14,26 @@ class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      expenseKey: null,
+    };
+  }
+
+  componentDidUpdate() {
+    console.log('__DASHBOARD__STATE', this.state);
+  }
+
+  handleCategoryClick = (e) => {
+    let targetIndex = e.target.dataset.index;
+    console.log('TARGET', targetIndex);
+    if (this.state.expenseKey !== targetIndex && targetIndex !== undefined) {
+      this.setState({expenseKey: targetIndex});
+    }
   }
 
   render() {
+    let category = this.props.categories.filter(category => category.id === this.state.expenseKey)[0];
     return (
       <React.Fragment>
         <section className="dashboard">
@@ -28,7 +45,7 @@ class Dashboard extends React.Component {
             <div className="expense-categories">
               {
                 this.props.categories.map((category, i) => 
-                  <div key={i} className="category">
+                  <div key={i} data-index={category.id} className="category" onClick={(e) => this.handleCategoryClick(e)}>
                     <CategoryItem 
                       key={i} 
                       category={category}
@@ -40,30 +57,28 @@ class Dashboard extends React.Component {
               }
             </div>
             <div className="expense-items">
-              {
-                this.props.categories.map((category, i) =>
-                  <div key={i * 1.45923}>
-                    <div className="expense-form">
-                      <h4>Add An Expense Item: </h4>
-                      <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
-                    </div>
+              { category ? 
+                <div key={category.id} data-index={category.id} className="category-expenses">
+                  <div className="expense-form">
+                    <h4>Add An Expense Item: </h4>
+                    <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
+                  </div>
+                  <div className="expense-list">
                     {
                       this.props.expenses[category.id].map((expense, i) =>
-                        <div key={i * 1.25873}>
-                          <div key={i} className="expense-item">
-                            <ExpenseItem
-                              key={expense.id}
-                              expense={expense}
-                              handleUpdate={this.props.handleUpdateExpense}
-                              handleDestory={this.props.handleDestroyExpense}
-                              updateBudget={this.handleBudgetChange}
-                            />
-                          </div>
+                        <div key={i} className="expense-item">
+                          <ExpenseItem
+                            key={expense.id}
+                            expense={expense}
+                            handleUpdate={this.props.handleUpdateExpense}
+                            handleDestory={this.props.handleDestroyExpense}
+                            updateBudget={this.handleBudgetChange}
+                          />
                         </div>)
                     }
                   </div>
-                )
-              
+                </div>
+                : null
               }
             </div>
           </div>
