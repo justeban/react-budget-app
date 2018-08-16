@@ -24,11 +24,9 @@ class Dashboard extends React.Component {
     console.log('__DASHBOARD__STATE', this.state);
   }
 
-  setExpenseFocus = () => {
-    console.log("DO WE GET HERE");
-    let expenseKey = this.props.categories[this.props.categories.length - 1].id;
-    this.setState({ expenseKey });
-  } 
+  setExpenseFocus = (id) => {
+    this.setState({expenseKey: id});
+  }
 
   handleCategoryClick = (e) => {
     let targetIndex = e.target.dataset.index;
@@ -45,7 +43,7 @@ class Dashboard extends React.Component {
         <section className="dashboard">
           <div className="category-form">
             <h2>Add a New Budget Category</h2>
-            <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} />
+            <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus}/>
           </div>
           <div className="budget-content">
             <div className="expense-categories">
@@ -64,7 +62,7 @@ class Dashboard extends React.Component {
             </div>
             <div className="expense-items">
               { category ? 
-                <div key={category.id} data-index={category.id} className="category-expenses">
+                <div key={this.state.expenseKey} data-index={category.id} className="category-expenses">
                   <div className="expense-form">
                     <h4>Add An Expense Item: </h4>
                     <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
