@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid/v4';
 
 export default class CategoryForm extends React.Component {
 
@@ -10,10 +11,15 @@ export default class CategoryForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.handler(Object.assign({}, this.state));
-
-    if (this.props.toggle) { this.props.toggle(); }
+    let category = this.state;
+    category.id = uuid();
+    category.createDate = new Date();
+    this.props.handler(Object.assign({}, category));
+    
     this.setState({title: '', budget: ''});
+    
+    if (this.props.toggle) { this.props.toggle(); }
+    if (this.props.setExpenseFocus) { this.props.setExpenseFocus(category.id); }
   }
 
   handleChange = (e) => {
