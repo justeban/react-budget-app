@@ -30,10 +30,28 @@ class Dashboard extends React.Component {
 
   handleCategoryClick = (e) => {
     let targetIndex = e.target.dataset.index;
-    console.log('TARGET', targetIndex);
     if (this.state.expenseKey !== targetIndex && targetIndex !== undefined) {
       this.setState({expenseKey: targetIndex});
     }
+  }
+
+  handleCategoryDelete = (id) => {
+    
+    let confirmDelete = confirm('Are you sure you want to delete this category?');
+
+    if (confirmDelete) {
+
+      this.props.categories.forEach((category, i) => {
+        let expenseKey = i > 0 
+          ? this.props.categories && this.props.categories[i - 1].id : this.props.categories.length 
+            ? this.props.categories && this.props.categories[i + 1] && this.props.categories[i + 1].id : null; 
+        
+        category.id === id && id === this.state.expenseKey ? this.setState({ expenseKey }) : null;
+      });
+
+      this.props.handleDestroyCategory(id);
+    }
+
   }
 
   render() {
@@ -55,7 +73,7 @@ class Dashboard extends React.Component {
                       category={category}
                       expenses={this.props.expenses}
                       handleUpdate={this.props.handleUpdateCategory}
-                      handleDestroy={this.props.handleDestroyCategory}
+                      handleCategoryDelete={this.handleCategoryDelete}
                     /> 
                   </div>)
               }

@@ -37,7 +37,7 @@ export default class CategoryItem extends React.Component {
           <h3>{this.props.category.title}</h3>
           <div className="budget">$ {this.props.category.budget} | $ {this.handleBudgetChange()}</div>
           <div className="cat-icons">
-            <i className="fas fa-trash-alt" alt="Delete Category" title="Delete Category" onClick={() => this.props.handleDestroy(this.props.category.id)}></i>
+            <i className="fas fa-trash-alt" alt="Delete Category" title="Delete Category" onClick={() => this.props.handleCategoryDelete(this.props.category.id)}></i>
             <i className="fas fa-pencil-alt" alt="Edit Category" title="Edit Category" onClick={this.toggleEditing}></i>
           </div>
         </div>
