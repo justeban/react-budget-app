@@ -206,7 +206,9 @@ body {
         display: flex;
         flex: 1;
         flex-direction: column;
-        
+        .category.active {
+          background: red;
+        }
         .category {
           background: #51992D;
           border: solid 1px #51992D;

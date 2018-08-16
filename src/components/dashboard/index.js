@@ -56,6 +56,9 @@ class Dashboard extends React.Component {
 
   render() {
     let category = this.props.categories.filter(category => category.id === this.state.expenseKey)[0];
+    // Category Classes 
+    let categoryClassName = 'category';
+
     return (
       <React.Fragment>
         <section className="dashboard">
@@ -67,7 +70,11 @@ class Dashboard extends React.Component {
             <div className="expense-categories">
               {
                 this.props.categories.map((category, i) => 
-                  <div key={i} data-index={category.id} className="category" onClick={(e) => this.handleCategoryClick(e)}>
+                  <div 
+                    key={i} 
+                    data-index={category.id} 
+                    className={category.id === this.state.expenseKey ? 'category active' : 'category'} 
+                    onClick={(e) => this.handleCategoryClick(e)}>
                     <CategoryItem 
                       key={i} 
                       category={category}
