@@ -8,7 +8,7 @@ export default class ExpenseForm extends React.Component {
     let defaultState = {
       categoryId: this.props.category && this.props.category.id || '',
       title: '',
-      amountSpent: 0,
+      amountSpent: '',
       memo: '',
     };
 

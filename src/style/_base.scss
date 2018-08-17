@@ -84,14 +84,19 @@ body {
       background: #7BB2D9;
       border: solid 1px white;
       border-radius: 25px 0 25px 25px;
-      box-shadow: -1px 2px 30px -10px rgba(0,0,0,.5);
+      bottom: 0;
+      box-shadow: -1px 2px 30px -10px rgba(0, 0, 0, 0.5);
       color: white;
-      display: flex;
-      flex-direction: column;
+      height: 14em;
+      left: 0;
       margin: auto;
-      padding: 1em;
+      padding: 1.2em;
+      position: absolute;
+      right: 0;
       text-align: center;
+      top: 0;
       transform: scale(1.3) skew(2deg);
+      width: 14em;
 
       i {
         font-size: 6em;
@@ -202,16 +207,23 @@ body {
       height: calc(100% - 8em);
 
       .expense-categories {
+        background: #1B2F33;
+        border-radius: 3px;
         color: white;
         display: flex;
         flex: 1;
         flex-direction: column;
-        
+        height: 97%;
+        overflow-y: scroll;
+        margin: 0 .25em;
+        padding: .5em;
+
         .category {
-          background: #51992D;
-          border: solid 1px #51992D;
-          border-radius: 3px;
-          box-shadow: $lightShadow;
+          background: #121E21;
+          // border-radius: 3px;
+          // box-shadow: $lightShadow;
+          border-bottom: solid .5px white;
+          cursor: pointer;
           padding: .5em;
           position: relative;
 
@@ -313,6 +325,7 @@ body {
           }
 
           &:before {
+            border-radius: 3px;
             content: '';
             height: 100%;
             left: 0;
@@ -322,11 +335,23 @@ body {
             z-index: 5;
           }
         }
+         .category.active {
+          background: none;
+          transform: scale(1.005);
+        }
+
+        .category.active:before {
+          background: none;
+        }
+        .category:last-child {
+          border: none;
+        }
       }
       .expense-items {
         display: flex;
         flex: 1;
         flex-direction: column;
+        margin: 0 .25em;
         position: relative;
 
         .category-expenses {
@@ -342,7 +367,6 @@ body {
             box-shadow: -3px 5px 5px -6px rgba(0, 0, 0, 0.3);
             color: white;
             font-size: 1.4em;
-            margin: .5em;
             padding: .8em;
 
             > form {
@@ -387,13 +411,18 @@ body {
         }
       }
       .expense-list {
+        background: #28502E;
+        border-radius: 3px;
+        margin-top: .5em;
         overflow-y: scroll;
+        padding: .5em;
 
         .expense-item {
-        padding: .8em;
-        margin: .5em;
-        background: wheat;
-        border-radius: 3px;
+
+          background: #28502E;
+          border-bottom: solid .5px white;
+          color: white;
+          padding: .5em;
 
           title {
             display: inline-block;
@@ -422,6 +451,9 @@ body {
               padding: .5em;
             }
           }
+        }
+        .expense-item:last-child {
+          border: none;
         }
       }
     }

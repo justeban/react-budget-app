@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      expenseKey: null,
+      expenseKey: Object.keys(this.props.expenses)[0] || null,
     };
   }
 
@@ -30,14 +30,35 @@ class Dashboard extends React.Component {
 
   handleCategoryClick = (e) => {
     let targetIndex = e.target.dataset.index;
-    console.log('TARGET', targetIndex);
     if (this.state.expenseKey !== targetIndex && targetIndex !== undefined) {
       this.setState({expenseKey: targetIndex});
     }
   }
 
+  handleCategoryDelete = (id) => {
+    
+    let confirmDelete = confirm('Are you sure you want to delete this category?');
+
+    if (confirmDelete) {
+
+      this.props.categories.forEach((category, i) => {
+        let expenseKey = i > 0 
+          ? this.props.categories && this.props.categories[i - 1].id : this.props.categories.length 
+            ? this.props.categories && this.props.categories[i + 1] && this.props.categories[i + 1].id : null; 
+        
+        category.id === id && id === this.state.expenseKey ? this.setState({ expenseKey }) : null;
+      });
+
+      this.props.handleDestroyCategory(id);
+    }
+
+  }
+
   render() {
     let category = this.props.categories.filter(category => category.id === this.state.expenseKey)[0];
+    // Category Classes 
+    let categoryClassName = 'category';
+
     return (
       <React.Fragment>
         <section className="dashboard">
@@ -49,13 +70,17 @@ class Dashboard extends React.Component {
             <div className="expense-categories">
               {
                 this.props.categories.map((category, i) => 
-                  <div key={i} data-index={category.id} className="category" onClick={(e) => this.handleCategoryClick(e)}>
+                  <div 
+                    key={i} 
+                    data-index={category.id} 
+                    className={category.id === this.state.expenseKey ? 'category active' : 'category'} 
+                    onClick={(e) => this.handleCategoryClick(e)}>
                     <CategoryItem 
                       key={i} 
                       category={category}
                       expenses={this.props.expenses}
                       handleUpdate={this.props.handleUpdateCategory}
-                      handleDestroy={this.props.handleDestroyCategory}
+                      handleCategoryDelete={this.handleCategoryDelete}
                     /> 
                   </div>)
               }
@@ -67,7 +92,7 @@ class Dashboard extends React.Component {
                     <h4>Add An Expense Item: </h4>
                     <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
                   </div>
-                  <div className="expense-list">
+                  {this.props.expenses[category.id].length ? <div className="expense-list">
                     {
                       this.props.expenses[category.id].map((expense, i) =>
                         <div key={i} className="expense-item">
@@ -80,7 +105,8 @@ class Dashboard extends React.Component {
                           />
                         </div>)
                     }
-                  </div>
+                  </div> : null
+                }
                 </div>
                 : null
               }

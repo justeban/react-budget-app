@@ -6,7 +6,7 @@ export default class CategoryForm extends React.Component {
   constructor(props) {
     super(props);
   
-    this.state = this.props.category || { title: '', budget: 0 };
+    this.state = this.props.category || { title: '', budget: '' };
   }
 
   handleSubmit = (e) => {
