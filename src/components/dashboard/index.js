@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      expenseKey: null,
+      expenseKey: Object.keys(this.props.expenses)[0] || null,
     };
   }
 
@@ -92,7 +92,7 @@ class Dashboard extends React.Component {
                     <h4>Add An Expense Item: </h4>
                     <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
                   </div>
-                  <div className="expense-list">
+                  {this.props.expenses[category.id].length ? <div className="expense-list">
                     {
                       this.props.expenses[category.id].map((expense, i) =>
                         <div key={i} className="expense-item">
@@ -105,7 +105,8 @@ class Dashboard extends React.Component {
                           />
                         </div>)
                     }
-                  </div>
+                  </div> : null
+                }
                 </div>
                 : null
               }
