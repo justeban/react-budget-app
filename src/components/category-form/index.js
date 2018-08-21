@@ -9,7 +9,7 @@ export default class CategoryForm extends React.Component {
     this.state = this.props.category || { title: '', budget: '' };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     
     let category = this.state;
@@ -24,7 +24,7 @@ export default class CategoryForm extends React.Component {
     if (this.props.setExpenseFocus) { this.props.setExpenseFocus(category.id); }
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
