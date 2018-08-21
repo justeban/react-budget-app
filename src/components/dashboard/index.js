@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
 
     this.state = {
       expenseKey: Object.keys(this.props.expenses)[0] || null,
+      toggleForm: false,
     };
   }
 
@@ -24,18 +25,22 @@ class Dashboard extends React.Component {
     console.log('__DASHBOARD__STATE', this.state);
   }
 
-  setExpenseFocus = (id) => {
+  toggleForm = e => {
+    this.state.toggleForm ? this.setState({toggleForm: false}) : this.setState({toggleForm: true});
+  }
+
+  setExpenseFocus = id => {
     this.setState({expenseKey: id});
   }
 
-  handleCategoryClick = (e) => {
+  handleCategoryClick = e => {
     let targetIndex = e.target.dataset.index;
     if (this.state.expenseKey !== targetIndex && targetIndex !== undefined) {
       this.setState({expenseKey: targetIndex});
     }
   }
 
-  handleCategoryDelete = (id) => {
+  handleCategoryDelete = id => {
     
     let confirmDelete = confirm('Are you sure you want to delete this category?');
 
@@ -62,28 +67,34 @@ class Dashboard extends React.Component {
     return (
       <React.Fragment>
         <section className="dashboard">
-          <div className="category-form">
-            <h2>Add a New Budget Category</h2>
-            <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus}/>
-          </div>
           <div className="budget-content">
             <div className="expense-categories">
-              {
-                this.props.categories.map((category, i) => 
-                  <div 
-                    key={i} 
-                    data-index={category.id} 
-                    className={category.id === this.state.expenseKey ? 'category active' : 'category'} 
-                    onClick={(e) => this.handleCategoryClick(e)}>
-                    <CategoryItem 
+              <div className="category-form">
+                <i className="fas fa-plus" onClick={this.toggleForm}></i>
+                {
+                  this.state.toggleForm ?
+                    <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} />
+                    : null
+                }
+              </div>
+              <div className="category-list">
+                {
+                  this.props.categories.map((category, i) => 
+                    <div 
                       key={i} 
-                      category={category}
-                      expenses={this.props.expenses}
-                      handleUpdate={this.props.handleUpdateCategory}
-                      handleCategoryDelete={this.handleCategoryDelete}
-                    /> 
-                  </div>)
-              }
+                      data-index={category.id} 
+                      className={category.id === this.state.expenseKey ? 'category active' : 'category'} 
+                      onClick={e => this.handleCategoryClick(e)}>
+                      <CategoryItem 
+                        key={i} 
+                        category={category}
+                        expenses={this.props.expenses}
+                        handleUpdate={this.props.handleUpdateCategory}
+                        handleCategoryDelete={this.handleCategoryDelete}
+                      /> 
+                    </div>)
+                }
+              </div>
             </div>
             <div className="expense-items">
               { category ? 
@@ -106,7 +117,7 @@ class Dashboard extends React.Component {
                         </div>)
                     }
                   </div> : null
-                }
+                  }
                 </div>
                 : null
               }
