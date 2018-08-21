@@ -11,9 +11,11 @@ export default class CategoryForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    
     let category = this.state;
-    category.id = uuid();
-    category.createDate = new Date();
+    category.id = this.props.category && this.props.category.id || uuid();
+    category.createDate = this.props.category && this.props.category.createDate || new Date();
+
     this.props.handler(Object.assign({}, category));
     
     this.setState({title: '', budget: ''});
