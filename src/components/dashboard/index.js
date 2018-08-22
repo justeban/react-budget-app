@@ -70,11 +70,16 @@ class Dashboard extends React.Component {
           <div className="budget-content">
             <div className="expense-categories">
               <div className="category-form">
-                <i className="fas fa-plus" onClick={this.toggleForm}></i>
+                {
+                  this.state.toggleForm ? 
+                    null
+                    : <i className="fas fa-plus" onClick={this.toggleForm}></i>
+
+                }
                 {
                   this.state.toggleForm ?
-                    <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} />
-                    : null
+                    <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} toggle={this.toggleForm}/>
+                    : <h2 onClick={this.toggleForm}>Add a New Budget Category</h2>
                 }
               </div>
               <div className="category-list">

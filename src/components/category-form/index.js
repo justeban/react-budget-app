@@ -29,13 +29,20 @@ export default class CategoryForm extends React.Component {
   }
 
   render() {
+    // This exist so checkmark doesn't submit without ensuring values exist
+    let handleSubmit = this.state.title.length && this.state.budget.length ? this.handleSubmit : null;
+    let conditionalClass = this.props.classGiven ? this.props.classGiven : '';
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleChange} placeholder="Enter Category Name"name="title" type="text" required value={this.state.title}/>
-        <span>$</span> 
-        <input onChange={this.handleChange} placeholder="Enter Budget Amt" name="budget" type="number" required value={this.state.budget} />
-        <input type="submit"/>
-      </form>
+      <React.Fragment>
+        <i className={`fas fa-check ${conditionalClass}`} onClick={handleSubmit}></i>
+        <i className={`fas fa-plus ${conditionalClass}`} onClick={this.props.toggle}></i>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} placeholder="Enter Category Name"name="title" type="text" required value={this.state.title}/>
+          <span>$</span> 
+          <input onChange={this.handleChange} placeholder="Enter Budget Amt" name="budget" type="number" required value={this.state.budget} />
+          <input type="submit"/>
+        </form>
+      </React.Fragment>
     );
   }
 }
