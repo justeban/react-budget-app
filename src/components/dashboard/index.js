@@ -17,7 +17,8 @@ class Dashboard extends React.Component {
 
     this.state = {
       expenseKey: Object.keys(this.props.expenses)[0] || null,
-      toggleForm: false,
+      toggleCategoryForm: false,
+      toggleExpenseForm: false,
     };
   }
 
@@ -25,8 +26,12 @@ class Dashboard extends React.Component {
     console.log('__DASHBOARD__STATE', this.state);
   }
 
-  toggleForm = e => {
-    this.state.toggleForm ? this.setState({toggleForm: false}) : this.setState({toggleForm: true});
+  toggleCategoryForm = () => {
+    this.state.toggleCategoryForm ? this.setState({toggleCategoryForm: false}) : this.setState({toggleCategoryForm: true});
+  }
+
+  toggleExpenseForm = () => {
+    this.state.toggleExpenseForm ? this.setState({ toggleExpenseForm: false }) : this.setState({ toggleExpenseForm: true });
   }
 
   setExpenseFocus = id => {
@@ -61,9 +66,6 @@ class Dashboard extends React.Component {
 
   render() {
     let category = this.props.categories.filter(category => category.id === this.state.expenseKey)[0];
-    // Category Classes 
-    let categoryClassName = 'category';
-
     return (
       <React.Fragment>
         <section className="dashboard">
@@ -71,15 +73,15 @@ class Dashboard extends React.Component {
             <div className="expense-categories">
               <div className="category-form">
                 {
-                  this.state.toggleForm ? 
+                  this.state.toggleCategoryForm ? 
                     null
-                    : <i className="fas fa-plus" onClick={this.toggleForm}></i>
+                    : <i className="fas fa-plus" onClick={this.toggleCategoryForm}></i>
 
                 }
                 {
-                  this.state.toggleForm ?
-                    <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} toggle={this.toggleForm}/>
-                    : <h2 onClick={this.toggleForm}>Add a New Budget Category</h2>
+                  this.state.toggleCategoryForm ?
+                    <CategoryForm handler={this.props.handleCreateCategory} setExpenseFocus={this.setExpenseFocus} toggle={this.toggleCategoryForm}/>
+                    : <h2 onClick={this.toggleCategoryForm}>Add a New Budget Category</h2>
                 }
               </div>
               <div className="category-list">
@@ -105,8 +107,16 @@ class Dashboard extends React.Component {
               { category ? 
                 <div key={this.state.expenseKey} data-index={category.id} className="category-expenses">
                   <div className="expense-form">
-                    <h4>Add An Expense Item: </h4>
-                    <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
+                    {
+                      this.state.toggleExpenseForm ? 
+                        null
+                        : <i className="fas fa-plus" onClick={this.toggleExpenseForm}></i>
+                    }
+                    {
+                      this.state.toggleExpenseForm ? 
+                        <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
+                        : <h4 onClick={this.toggleExpenseForm}>Add An Expense Item: </h4>
+                    }
                   </div>
                   {this.props.expenses[category.id].length ? <div className="expense-list">
                     {
