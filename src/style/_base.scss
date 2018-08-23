@@ -211,8 +211,9 @@ body {
       height: calc(100% - 8em);
 
       .expense-categories {
-        background: #1B2F33;
+        background: #5C993E;
         border-radius: 3px;
+        box-shadow: 1px 1px 25px -4px rgba(0, 0, 0, 0.4);
         color: white;
         display: flex;
         flex: 1;
@@ -225,9 +226,6 @@ body {
           overflow: scroll;
         }
         .category {
-          background: #121E21;
-          // border-radius: 3px;
-          // box-shadow: $lightShadow;
           border-bottom: solid .5px white;
           cursor: pointer;
           padding: .5em;
@@ -343,8 +341,8 @@ body {
           }
         }
          .category.active {
-          background: none;
-          transform: scale(1.005);
+          background: #273235;
+          transform: scale(1.01);
         }
 
         .category.active:before {
@@ -355,8 +353,9 @@ body {
         }
       }
       .expense-items {
-        background: #1B2F33;
+        background: #273235;
         border-radius: 3px;
+        box-shadow: 1px 1px 25px -4px rgba(0, 0, 0, 0.4);
         display: flex;
         flex: 1;
         flex-direction: column;
