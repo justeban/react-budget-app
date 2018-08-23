@@ -19,6 +19,7 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 6,
@@ -29,8 +30,12 @@
     }
   },
   "rules": {
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "no-console": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "error",
     "indent": [
       "error",
       2,

@@ -31,7 +31,7 @@ export default class ExpenseItem extends React.Component {
           <i className="fas fa-trash-alt" alt="Delete Expense" title="Delete Expense" onClick={() => this.props.handleDestory(this.props.expense)}></i>
         </utilities>
         {
-          this.state.editing ? <ExpenseForm handler={this.props.handleUpdate} expense={this.props.expense} toggle={this.toggleEditing} /> : null
+          this.state.editing ? <ExpenseForm handler={this.props.handleUpdate} expense={this.props.expense} toggle={this.toggleEditing} classGiven={'hide'}/> : null
         }
       </React.Fragment>
     );

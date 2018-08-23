@@ -26,7 +26,7 @@ export default class CategoryItem extends React.Component {
       return acc;
     }, 0);
     let amt = parseFloat(this.props.category.budget) - expAmt;
-    return `${amt}`.match(/\./) ? amt.toFixed(2): amt;
+    return `${amt}`.match(/\./) ? amt.toFixed(2) : amt;
 
   }
 
@@ -42,7 +42,7 @@ export default class CategoryItem extends React.Component {
           </div>
         </div>
         {
-          this.state.editing ? <CategoryForm handler={this.props.handleUpdate} category={this.props.category} toggle={this.toggleEditing}/> : null
+          this.state.editing ? <CategoryForm handler={this.props.handleUpdate} category={this.props.category} toggle={this.toggleEditing} classGiven={'hide'}/> : null
         }
       </React.Fragment>
     );
