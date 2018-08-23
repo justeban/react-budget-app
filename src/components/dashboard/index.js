@@ -114,8 +114,8 @@ class Dashboard extends React.Component {
                     }
                     {
                       this.state.toggleExpenseForm ? 
-                        <ExpenseForm handler={this.props.handleCreateExpense} category={category} />
-                        : <h4 onClick={this.toggleExpenseForm}>Add An Expense Item: </h4>
+                        <ExpenseForm handler={this.props.handleCreateExpense} category={category} toggle={this.toggleExpenseForm} />
+                        : <h4 onClick={this.toggleExpenseForm}>Add An Expense Item</h4>
                     }
                   </div>
                   {this.props.expenses[category.id].length ? <div className="expense-list">
